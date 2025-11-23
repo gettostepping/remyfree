@@ -5,9 +5,6 @@ import Header from '@/components/Header'
 import PresenceHeartbeat from '@/components/PresenceHeartbeat'
 import RequireDiscordLink from '@/components/RequireDiscordLink'
 import DiscordInviteHandler from '@/components/DiscordInviteHandler'
-import ChangelogModal from '@/components/ChangelogModal'
-import MassInviteMessageModal from '@/components/MassInviteMessageModal'
-
 export const metadata: Metadata = {
   title: 'Reminiscent Streaming',
   description: 'Streaming with Vidsrc + TMDB',
@@ -33,8 +30,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <DiscordInviteHandler />
           <Header />
           <PresenceHeartbeat />
-          <ChangelogModal />
-          <MassInviteMessageModal />
           {children}
         </Providers>
       </body>
