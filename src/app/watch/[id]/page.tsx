@@ -104,7 +104,14 @@ export default function WatchPage({ params }: { params: { id: string } }) {
         if (media.mode === 'embed' && media.src) {
           setStreamingResult({ url: media.src, service: 'mini', fallbackUsed: false } as any)
         } else if (media.mode === 'hls' && media.hlsSrc) {
-          setAnimeStream({ url: media.hlsSrc, tracks: media.hlsTracks || [], serverName: 'mini', category: 'sub' })
+          const normalizedTracks = (media.hlsTracks || []).map((t: any) => ({
+            src: t?.src,
+            label: t?.label,
+            // Normalize kinds: treat 'captions' as 'subtitles', only allow 'metadata' or 'subtitles'
+            kind: t?.kind === 'metadata' ? 'metadata' : 'subtitles',
+            lang: t?.lang
+          }))
+          setAnimeStream({ url: media.hlsSrc, tracks: normalizedTracks, serverName: 'mini', category: 'sub' })
         }
         attachTo(params.id)
         try {
