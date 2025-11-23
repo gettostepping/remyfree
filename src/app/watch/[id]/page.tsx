@@ -279,7 +279,7 @@ export default function WatchPage({ params }: { params: { id: string } }) {
             mode: 'embed',
             src: currentStreaming.url,
             title: currentShowData?.title || currentShowData?.name || '',
-            poster: currentShowData ? (currentShowData.poster_path ? getPosterUrl(currentShowData.poster_path, 'w500') : undefined) : undefined
+            poster: currentShowData ? (currentShowData.poster_path ? getPosterUrl(currentShowData.poster_path, 'w500') || undefined : undefined) : undefined
           }, false)
           console.debug('WatchPage unmount: calling detachFrom', params.id)
           detachFrom(params.id)
@@ -297,7 +297,7 @@ export default function WatchPage({ params }: { params: { id: string } }) {
             hlsSrc: currentAnimeStream.url,
             hlsTracks: currentAnimeStream.tracks,
             title: currentShowData?.title || currentShowData?.name || '',
-            poster: currentShowData ? (currentShowData.poster_path ? getPosterUrl(currentShowData.poster_path, 'w500') : undefined) : undefined
+            poster: currentShowData ? (currentShowData.poster_path ? getPosterUrl(currentShowData.poster_path, 'w500') || undefined : undefined) : undefined
           }, false)
           console.debug('WatchPage unmount: calling detachFrom', params.id)
           detachFrom(params.id)
@@ -369,7 +369,7 @@ export default function WatchPage({ params }: { params: { id: string } }) {
           tmdbId: numericId,
           type: 'tv',
           title: showData.name || showData.title || 'Unknown',
-          poster: getPosterUrl(showData.poster_path, 'w500'),
+          poster: getPosterUrl(showData.poster_path, 'w500') || undefined,
           lastSeason: season,
           lastEpisode: episode
         }
@@ -447,7 +447,7 @@ export default function WatchPage({ params }: { params: { id: string } }) {
               mode: 'embed',
               src: result.url,
               title: showData?.title || showData?.name || '',
-              poster: showData ? (showData.poster_path ? getPosterUrl(showData.poster_path, 'w500') : undefined) : undefined
+              poster: showData ? (showData.poster_path ? getPosterUrl(showData.poster_path, 'w500') || undefined : undefined) : undefined
             }, true)
           } catch (e) {
             console.debug('Mini player not available yet:', e)
@@ -949,7 +949,7 @@ export default function WatchPage({ params }: { params: { id: string } }) {
                 hlsSrc: stream.url,
                 hlsTracks: stream.tracks,
                 title: showData?.title || showData?.name || '',
-                poster: showData ? (showData.poster_path ? getPosterUrl(showData.poster_path, 'w500') : undefined) : undefined
+                poster: showData ? (showData.poster_path ? getPosterUrl(showData.poster_path, 'w500') || undefined : undefined) : undefined
               }, true)
               return
             } catch (attemptError) {
@@ -1070,7 +1070,7 @@ export default function WatchPage({ params }: { params: { id: string } }) {
           hlsSrc: streamUrl,
           hlsTracks: normalizeTracks(tracks),
           title: showData?.title || showData?.name || '',
-          poster: showData ? (showData.poster_path ? getPosterUrl(showData.poster_path, 'w500') : undefined) : undefined
+          poster: showData ? (showData.poster_path ? getPosterUrl(showData.poster_path, 'w500') || undefined : undefined) : undefined
         }, true)
         setIsAnime(true)
         setStreamingError(null)
@@ -1172,7 +1172,7 @@ export default function WatchPage({ params }: { params: { id: string } }) {
           hlsSrc: streamUrl,
           hlsTracks: normalizeTracks(tracks),
           title: showData?.title || showData?.name || '',
-          poster: showData ? (showData.poster_path ? getPosterUrl(showData.poster_path, 'w500') : undefined) : undefined
+          poster: showData ? (showData.poster_path ? getPosterUrl(showData.poster_path, 'w500') || undefined : undefined) : undefined
         }, true)
         setIsAnime(true)
         setStreamingError(null)
@@ -1436,7 +1436,7 @@ export default function WatchPage({ params }: { params: { id: string } }) {
                                 mode: 'embed',
                                 src: streamingResult.url,
                                 title: showData?.title || showData?.name || '',
-                                poster: showData ? (showData.poster_path ? getPosterUrl(showData.poster_path, 'w500') : undefined) : undefined
+                                poster: showData ? (showData.poster_path ? getPosterUrl(showData.poster_path, 'w500') || undefined : undefined) : undefined
                               }, false)
                               // ensure mini player becomes visible
                               detachFrom(params.id)
@@ -1449,7 +1449,7 @@ export default function WatchPage({ params }: { params: { id: string } }) {
                                 hlsSrc: animeStream.url,
                                 hlsTracks: animeStream.tracks,
                                 title: showData?.title || showData?.name || '',
-                                poster: showData ? (showData.poster_path ? getPosterUrl(showData.poster_path, 'w500') : undefined) : undefined
+                                poster: showData ? (showData.poster_path ? getPosterUrl(showData.poster_path, 'w500') || undefined : undefined) : undefined
                               }, false)
                               detachFrom(params.id)
                               setAnimeStream(null)
