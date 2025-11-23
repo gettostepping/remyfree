@@ -11,6 +11,7 @@ import PopupBlockerBanner from '@/components/PopupBlockerBanner'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faSearch, faBell, faUser, faTh, faList, faFilter } from '@fortawesome/free-solid-svg-icons'
 import { getStreamingUrl, setupStreamingEventListeners, StreamingResult } from '@/lib/streaming'
+import normalizeTracks from '@/lib/normalizeTracks'
 import { useSession } from 'next-auth/react'
 import { convertAniwatchDetailToShowData, convertAniwatchListToCards } from '@/lib/aniwatch-utils'
 // NotSignedIn removed
@@ -1064,12 +1065,7 @@ export default function WatchPage({ params }: { params: { id: string } }) {
         
         setAnimeStream({
           url: streamUrl,
-          tracks: tracks.map((track: any, index: number) => ({
-            src: track.proxyUrl || track.url || track.src,
-            label: track.label || `Subtitle ${index + 1}`,
-            kind: track.kind || 'subtitles',
-            lang: track.lang || track.srcLang
-          })).filter((track: any) => track.src),
+          tracks: normalizeTracks(tracks),
           serverName: 'animepahe',
           category: 'sub'
         })
@@ -1078,12 +1074,7 @@ export default function WatchPage({ params }: { params: { id: string } }) {
           id: params.id,
           mode: 'hls',
           hlsSrc: streamUrl,
-          hlsTracks: tracks.map((track: any, index: number) => ({
-            src: track.proxyUrl || track.url || track.src,
-            label: track.label || `Subtitle ${index + 1}`,
-            kind: track.kind || 'subtitles',
-            lang: track.lang || track.srcLang
-          })).filter((t: any) => t.src),
+          hlsTracks: normalizeTracks(tracks),
           title: showData?.title || showData?.name || '',
           poster: showData ? (showData.poster_path ? getPosterUrl(showData.poster_path, 'w500') : undefined) : undefined
         }, true)
@@ -1176,12 +1167,7 @@ export default function WatchPage({ params }: { params: { id: string } }) {
         
         setAnimeStream({
           url: streamUrl,
-          tracks: tracks.map((track: any, index: number) => ({
-            src: track.proxyUrl || track.url || track.src,
-            label: track.label || `Subtitle ${index + 1}`,
-            kind: track.kind || 'subtitles',
-            lang: track.lang || track.srcLang
-          })).filter((track: any) => track.src),
+          tracks: normalizeTracks(tracks),
           serverName: 'consumet',
           category: 'sub'
         })
@@ -1190,12 +1176,7 @@ export default function WatchPage({ params }: { params: { id: string } }) {
           id: params.id,
           mode: 'hls',
           hlsSrc: streamUrl,
-          hlsTracks: tracks.map((track: any, index: number) => ({
-            src: track.proxyUrl || track.url || track.src,
-            label: track.label || `Subtitle ${index + 1}`,
-            kind: track.kind || 'subtitles',
-            lang: track.lang || track.srcLang
-          })).filter((t: any) => t.src),
+          hlsTracks: normalizeTracks(tracks),
           title: showData?.title || showData?.name || '',
           poster: showData ? (showData.poster_path ? getPosterUrl(showData.poster_path, 'w500') : undefined) : undefined
         }, true)
