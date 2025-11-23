@@ -1,13 +1,12 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faGift, faShield, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 export default function MassInviteMessageModal() {
-  const { data: session, status } = useSession()
+  // NextAuth removed — don't rely on session for client-side checks
   const router = useRouter()
   const [message, setMessage] = useState<string | null>(null)
   const [messageId, setMessageId] = useState<string | null>(null)
@@ -18,11 +17,11 @@ export default function MassInviteMessageModal() {
     return Boolean((window as any).__changelogOpen)
   })
 
+  // Run check once on mount — if your API requires auth, it should handle anonymous requests gracefully.
   useEffect(() => {
-    if (status === 'authenticated' && session?.user?.email) {
-      checkForMessage()
-    }
-  }, [status, session])
+    if (typeof window === 'undefined') return
+    checkForMessage()
+  }, [])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
